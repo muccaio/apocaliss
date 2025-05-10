@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apocaliss</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #6a00f4, #b300ff);
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login-btn {
+      background: white;
+      color: #6a00f4;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    main { padding: 40px; min-height: 100vh; }
+    section { margin-bottom: 80px; padding-top: 60px; }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      text-align: center;
+      padding: 10px 0;
+      color: white;
+      font-size: 14px;
+    }
+
+    h3 {
+      font-size: 22px;
+      margin-top: 30px;
+      color: #d1d1d1;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      color: black;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content button i {
+      margin-right: 10px;
+    }
+
+    .btn-discord {
+      background-color: #5865F2;
+      color: white;
+    }
+
+    .btn-google {
+      background-color: #DB4437;
+      color: white;
+    }
+
+    .btn-register {
+      background-color: #6a00f4;
+      color: white;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #000;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .back-arrow {
+      font-size: 14px;
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      color: #6a00f4;
+      font-weight: bold;
+    }
+
+    .maintenance-warning {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #FFA500;
+      font-size: 16px;
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .bot-buttons {
+      text-align: left;
+      margin-top: 40px;
+      padding-left: 40px;
+    }
+
+    .bot-buttons a {
+      text-decoration: none;
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      color: white;
+      font-size: 16px;
+    }
+
+    .invite-btn, .support-btn {
+      background: linear-gradient(to right, #8e44ad, #6a00f4);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">Chi Siamo</a>
+      <a href="#services">Servizi</a>
+      <a href="#contact">Contatti</a>
+    </nav>
+    <button class="login-btn" onclick="openModal()">Login / Register</button>
+  </header>
+
+  <main>
+    <section id="home">
+      <h1>Apocaliss Discord Bot</h1>
+      <p>Il miglior bot per il tuo server Discord.</p>
+
+      <div class="bot-buttons">
+        <a href="https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot&permissions=BOT_PERMISSIONS" class="invite-btn">
+          <i class="fas fa-robot"></i> Invita il bot
+        </a>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>Chi Siamo</h2>
+      <p>Apocaliss è un bot Discord creato da un team di sviluppatori appassionati di tecnologia e community online. Il nostro obiettivo è fornire un’esperienza unica e semplificata per i server Discord, rendendo la gestione della community più facile e divertente.
+      Siamo un gruppo di professionisti che lavora instancabilmente per migliorare ogni aspetto di Apocaliss. 
+      Grazie alla nostra passione per il mondo di Discord, abbiamo progettato un bot potente ma facile da usare, in grado di soddisfare le esigenze di server di ogni tipo, dalle piccole comunità agli enormi server di gioco.
+      <h4>Perché scegliere Apocaliss?</h4>
+      Semplicità, potenza e affidabilità. Apocaliss è progettato per essere intuitivo e facilmente configurabile, anche per chi non ha esperienza con i bot di Discord. In più, il nostro team è sempre a disposizione per supportarti in ogni momento, garantendo un’esperienza senza problemi.</p>
+    </section>
+
+    <section id="services">
+      <h2>Servizi</h2>
+
+      <h3>🤖 Automazione</h3>
+      <p>Automatizza compiti ripetitivi come moderazione, benvenuti, ruoli e molto altro. Più tempo per la tua community, meno stress per lo staff.</p>
+
+      <h3>💬 Sistema Social</h3>
+      <p>Stimola l’attività degli utenti con un sistema di livelli, premi e classifiche basate sulla partecipazione nel server.</p>
+
+      <h3>🎫 Ticket di Supporto</h3>
+      <p>Gestisci richieste e segnalazioni in modo ordinato grazie al sistema integrato di ticket, facile da usare per staff e utenti.</p>
+
+      <h3>⚙️ Personalizzazione</h3>
+      <p>Adatta Apocaliss al tuo stile: modifica comandi, messaggi di risposta, trigger automatici e molto altro per rendere il bot unico come il tuo server.</p>
+
+      <h3>📈 Affidabilità e Aggiornamenti</h3>
+      <p>Bot stabile, costantemente aggiornato e pronto ad evolversi con le esigenze della tua community.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contatti</h2>
+      <p>Scrivici per collaborazioni o supporto.</p>
+
+      <div class="bot-buttons">
+        <a href="https://discord.gg/YOUR_SUPPORT_SERVER" class="support-btn">
+          <i class="fab fa-discord"></i> Server di supporto
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Apocaliss. All Rights Reserved.
+  </footer>
+
+  <!-- Modal Login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Accedi / Registrati</h2>
+
+      <button class="btn-discord">
+        <i class="fab fa-discord"></i>
+        Continua con Discord
+      </button>
+
+      <button class="btn-google">
+        <i class="fab fa-google"></i>
+        Continua con Google
+      </button>
+
+      <button class="btn-register" onclick="openRegisterModal()">
+        <i class="fas fa-user"></i>
+        Registrati
+      </button>
+
+      <div class="maintenance-warning">
+        ⚠️ Under Maintenance ⚠️
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Registrazione -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="back-arrow" onclick="goBackToLogin()">
+        <i class="fas fa-arrow-left"></i> Torna al Login
+      </span>
+      <h2>Registrazione</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="username">Nome</label>
+          <input type="text" id="username" name="username" placeholder="Inserisci il tuo nome" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Crea una password" required />
+        </div>
+        <button type="submit" class="btn-register">
+          Registrati
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+
+    function openModal() {
+      loginModal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      loginModal.style.display = 'none';
+    }
+
+    function openRegisterModal() {
+      loginModal.style.display = 'none';
+      registerModal.style.display = 'flex';
+    }
+
+    function closeRegisterModal() {
+      registerModal.style.display = 'none';
+    }
+
+    function goBackToLogin() {
+      registerModal.style.display = 'none';
+      loginModal.style.display = 'flex';
+    }
+
+    window.onclick = function(e) {
+      if (e.target == loginModal) closeModal();
+      if (e.target == registerModal) closeRegisterModal();
+    }
+  </script>
+
+</body>
+</html>
